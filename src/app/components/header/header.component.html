@@ -1,1 +1,22 @@
+<div class="menu-overlay" [class.active]="isMenuOpen" (click)="toggleMenu()"></div>
 
+<div class="container">
+  <a class="logo" routerLink="." fragment="home" (click)="closeMenu()">
+    <img src="assets/images/logo-vectorfrom.png" alt="VectorFrom Logo">
+  </a>
+
+  <div class="hamburger" [class.active]="isMenuOpen" (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav [class.active]="isMenuOpen">
+    <a routerLink="." fragment="home" (click)="closeMenu()">Главная</a>
+    <a routerLink="." fragment="about" (click)="closeMenu()">О нас</a>
+    <a routerLink="." fragment="how-to-order" (click)="closeMenu()">Как заказать</a>
+    <a routerLink="." fragment="services" (click)="closeMenu()">Услуги</a>
+    <a routerLink="." fragment="portfolio" (click)="closeMenu()">Портфолио</a>
+    <a routerLink="." fragment="contact" (click)="closeMenu()">Контакты</a>
+  </nav>
+</div>

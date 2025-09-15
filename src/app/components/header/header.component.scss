@@ -1,0 +1,155 @@
+// :host - это сам компонент <app-header>
+:host {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  // По умолчанию фон будет темным (для мобильной версии)
+  background-color: #222;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  // Добавляем плавный переход для смены фона
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+// Этот стиль будет применяться ко всему хедеру, когда он "проскроллен"
+// Мы его вынесли наверх, чтобы он работал и на мобильных, и на десктопе
+:host.scrolled {
+  background-color: #222;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  position: relative;
+}
+
+.logo img {
+  height: 40px;
+  display: block;
+}
+
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 998;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 100vh;
+  background: rgba(1, 16, 25, 0.67);
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 999;
+  transform: translateX(100%);
+  transition: transform 0.4s ease-in-out;
+
+  &.active {
+    transform: translateX(0);
+  }
+  a {
+    padding: 15px 0;
+    color: #f0f0f0;
+    text-decoration: none;
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    
+    // ДОБАВЬТЕ ЭТУ СТРОЧКУ
+    font-weight: 600; // Делает шрифт полужирным
+
+    &:hover {
+      background-color: #444;
+    }
+  }
+}
+.hamburger {
+  display: block;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  z-index: 1001;
+  position: relative;
+  span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 3px;
+    position: absolute;
+    left: 0;
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), top 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+  span:nth-child(1) { top: 0; }
+  span:nth-child(2) { top: 11px; }
+  span:nth-child(3) { top: 22px; }
+  &.active {
+    span:nth-child(1) { top: 11px; transform: rotate(135deg); }
+    span:nth-child(2) { opacity: 0; transform: translateX(-20px); }
+    span:nth-child(3) { top: 11px; transform: rotate(-135deg); }
+  }
+}
+// ...Конец мобильных стилей
+
+/* --- ОСНОВНЫЕ ИЗМЕНЕНИЯ ДЛЯ ДЕСКТОПА --- */
+@media (min-width: 768px) {
+  
+  // По умолчанию хедер на десктопе ПРОЗРАЧНЫЙ
+  :host {
+    background-color: transparent;
+    box-shadow: none; // Убираем тень
+  }
+  
+  .hamburger, .menu-overlay {
+    display: none;
+  }
+
+  nav {
+    position: static;
+    transform: translateX(0);
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    padding-top: 0;
+
+    a {
+      padding: 0;
+      margin-left: 25px;
+      width: auto;
+      // Добавим тень для текста, чтобы он был читаемым на любом фоне
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      
+      &:hover {
+        background-color: transparent;
+        color: #00aaff;
+      }
+    }
+  }
+}

@@ -1,19 +1,21 @@
 <div class="hero-container">
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="assets/video/background-video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-  </video>
+  <img src="assets/images/hero-background.jpg" alt="Фоновое изображение" class="hero-background-image">
 
   <div class="hero-overlay">
-    <div class="content-container">
-      <h1>Создаём ювелирное будущее в 3D</h1>
-      <p>
-        Наши украшения — это воплощение ваших идей в цифровом и физическом мире.
-      </p>
-      <div class="action-buttons">
-        <a href="#portfolio" class="btn primary">Посмотреть работы</a>
-        <a href="#contact" class="btn secondary">Связаться с нами</a>
+    <div class="slider-content">
+      <div *ngFor="let slide of slides; let i = index" 
+           class="slide" 
+           [class.active]="i === currentSlideIndex">
+        <h1>{{ slide.title }}</h1>
+        <p>{{ slide.description }}</p>
       </div>
+    </div>
+    <div class="slider-dots">
+      <span *ngFor="let slide of slides; let i = index"
+            class="dot"
+            [class.active]="i === currentSlideIndex"
+            (click)="goToSlide(i)">
+      </span>
     </div>
   </div>
 </div>

@@ -1,26 +1,53 @@
-/* src/app/components/hero-section/hero-section.component.scss */
+/* Анимация для "оживления" фонового изображения (Ken Burns) */
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.1) translate(-2%, 2%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+/* Анимация для текста слайдера */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .hero-container {
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  color: #ffffff;
 }
 
-.hero-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.7);
-}
-
-.hero-overlay {
+/* НОВЫЕ СТИЛИ ДЛЯ ФОНОВОГО ИЗОБРАЖЕНИЯ */
+.hero-background-image {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; // Гарантирует, что изображение покроет всю область
+  z-index: 1;
+  // Применяем анимацию
+  animation: kenBurns 25s ease-in-out infinite;
+}
+
+/* Стили для оверлея и слайдера остаются прежними */
+.hero-overlay {
+  position: relative;
+  z-index: 2;
   width: 100%;
   height: 100%;
   display: flex;
@@ -28,28 +55,41 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #ffffff;
-  padding: 20px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 70%, rgba(0, 0, 0, 0.3) 100%);
 }
 
-.content-container {
+.slider-content {
+  position: relative;
+  width: 100%;
   max-width: 800px;
-}
-
-h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-p {
-  font-size: 1.2rem;
+  min-height: 200px;
   margin-bottom: 2rem;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+  h1, p { opacity: 0; }
+  h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+  p { font-size: 1.2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    h1 { animation: fadeInUp 0.8s ease-out 0.3s forwards; }
+    p { animation: fadeInUp 0.8s ease-out 0.5s forwards; }
+  }
 }
 
 .action-buttons {
   display: flex;
   justify-content: center;
   gap: 20px;
+  margin-bottom: 2rem;
 }
 
 .btn {
@@ -57,37 +97,62 @@ p {
   text-decoration: none;
   border-radius: 5px;
   font-weight: bold;
-  transition: background-color 0.3s ease;
-
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
   &.primary {
     background-color: #ffd700;
     color: #000;
-    &:hover {
-      background-color: #e6c800;
-    }
+    &:hover { background-color: #e6c800; }
   }
-
   &.secondary {
     background-color: transparent;
     color: #fff;
-    border: 2px solid #fff;
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
+    border-color: #fff;
+    &:hover { background-color: rgba(255, 255, 255, 0.2); }
+  }
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 175px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: scale(0.9);
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+  }
+  &.active {
+    background-color: #ffffff;
+    transform: scale(1.2);
   }
 }
 
 @media (max-width: 768px) {
-  h1 {
-    font-size: 2rem;
+  .slide {
+    h1 { font-size: 2rem; }
+    p { font-size: 1rem; }
   }
-
-  p {
-    font-size: 1rem;
-  }
-
   .action-buttons {
     flex-direction: column;
     gap: 10px;
+    width: 80%;
+    max-width: 300px;
   }
 }
