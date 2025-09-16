@@ -5,7 +5,7 @@
 .site-footer {
   background-color: #1a1a2e;
   color: rgba(255, 255, 255, 0.7);
-  padding: 60px 20px 20px 20px;
+  padding: 20px;
 }
 
 .container {
@@ -17,7 +17,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .footer-column {
@@ -91,11 +91,11 @@
 @media (max-width: 992px) {
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 0px;
     text-align: center;
   }
   
-  .contact-list li, .social-links {
+  .contact-list li, .services-list li, .social-links {
     justify-content: center;
   }
 }
