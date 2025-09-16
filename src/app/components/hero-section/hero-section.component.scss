@@ -105,9 +105,9 @@
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
   }
   &.primary {
-    background-color: #ffd700;
+    background-color: var(--primary-color);
     color: #000;
-    &:hover { background-color: #e6c800; }
+    &:hover {  background-color: var(--primary-color-hover); }
   }
   &.secondary {
     background-color: transparent;

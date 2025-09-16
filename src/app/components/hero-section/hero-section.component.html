@@ -1,13 +1,13 @@
 <div class="hero-container">
-  <img src="assets/images/hero_background.jpg" alt="Фоновое изображение" class="hero-background-image">
+  <img src="assets/images/hero_background.jpg" class="hero-background-image">
 
   <div class="hero-overlay">
     <div class="slider-content">
       <div *ngFor="let slide of slides; let i = index" 
            class="slide" 
            [class.active]="i === currentSlideIndex">
-        <h1>{{ slide.title }}</h1>
-        <p>{{ slide.description }}</p>
+        <h1>{{ slide.title | translate }}</h1>
+        <p>{{ slide.description | translate}}</p>
       </div>
     </div>
     <div class="slider-dots">

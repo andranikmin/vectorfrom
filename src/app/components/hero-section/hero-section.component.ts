@@ -16,56 +16,46 @@ export class HeroSectionComponent implements OnInit, OnDestroy {
   // Массив с данными для наших слайдов
   public slides: Slide[] = [
     {
-      title: 'Создаём ювелирное будущее в 3D',
-      description: 'Наши украшения — это воплощение ваших идей в цифровом и физическом мире.'
+      title: '_hero_title_1',
+      description: '_hero_desc_1'
     },
     {
-      title: 'Индивидуальный дизайн и моделирование',
-      description: 'От эскиза до готовой 3D-модели, полностью соответствующей вашим пожеланиям.'
+      title: '_hero_title_2',
+      description: '_hero_desc_2'
     },
     {
-      title: 'Высококачественная визуализация',
-      description: 'Фотореалистичные рендеры, которые покажут ваше будущее изделие во всей красе.'
+      title: '_hero_title_3',
+      description: '_hero_desc_3'
     }
   ];
 
-  // Индекс активного слайда
   public currentSlideIndex = 0;
-  // Переменная для хранения таймера авто-прокрутки
   private slideInterval: any;
 
-  // Этот метод запускается один раз при создании компонента
   ngOnInit(): void {
     this.startAutoSlider();
   }
 
-  // Этот метод запускается при уничтожении компонента (например, при переходе на другую страницу)
   ngOnDestroy(): void {
-    // Очищаем таймер, чтобы избежать утечек памяти
     clearInterval(this.slideInterval);
   }
 
-  // Запуск автоматической смены слайдов
   startAutoSlider(): void {
     this.slideInterval = setInterval(() => {
       this.nextSlide();
-    }, 5000); // Меняем слайд каждые 5 секунд (5000 мс)
+    }, 5000);
   }
 
-  // Переключиться на конкретный слайд (для точек-индикаторов)
   goToSlide(index: number): void {
     this.currentSlideIndex = index;
-    // Перезапускаем таймер при ручном переключении
     clearInterval(this.slideInterval);
     this.startAutoSlider();
   }
 
-  // Показать следующий слайд
   nextSlide(): void {
     this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
   }
 
-  // Показать предыдущий слайд
   prevSlide(): void {
     this.currentSlideIndex = (this.currentSlideIndex - 1 + this.slides.length) % this.slides.length;
   }

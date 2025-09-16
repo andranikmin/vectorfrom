@@ -5,18 +5,49 @@
     <img src="assets/images/logo-vectorfrom.png" alt="VectorFrom Logo">
   </a>
 
-  <div class="hamburger" [class.active]="isMenuOpen" (click)="toggleMenu()">
-    <span></span>
-    <span></span>
-    <span></span>
+  <div class="desktop-nav">
+    <a routerLink="." fragment="home" (click)="closeMenu()">{{ '_home' | translate }}</a>
+    <a routerLink="." fragment="about" (click)="closeMenu()">{{ '_about_us' | translate }}</a>
+    <a routerLink="." fragment="how-to-order" (click)="closeMenu()">{{ '_how_to_order' | translate }}</a>
+    <a routerLink="." fragment="services" (click)="closeMenu()">{{ '_services' | translate }}</a>
+    <a routerLink="." fragment="portfolio" (click)="closeMenu()">{{ '_portfolio' | translate }}</a>
+    <a routerLink="." fragment="contact" (click)="closeMenu()">{{ '_contacts' | translate }}</a>
   </div>
-
-  <nav [class.active]="isMenuOpen">
-    <a routerLink="." fragment="home" (click)="closeMenu()">Главная</a>
-    <a routerLink="." fragment="about" (click)="closeMenu()">О нас</a>
-    <a routerLink="." fragment="how-to-order" (click)="closeMenu()">Как заказать</a>
-    <a routerLink="." fragment="services" (click)="closeMenu()">Услуги</a>
-    <a routerLink="." fragment="portfolio" (click)="closeMenu()">Портфолио</a>
-    <a routerLink="." fragment="contact" (click)="closeMenu()">Контакты</a>
-  </nav>
+  
+  <div class="controls">
+    <div class="lang-switcher">
+      <div class="current-lang" (click)="toggleLangDropdown()">
+        <img [src]="flags[translate.currentLang]" alt="Current language flag">
+        <span>{{ translate.currentLang | uppercase }}</span>
+        <svg class="dropdown-arrow" [class.open]="isLangDropdownOpen" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+        </svg>
+      </div>
+      <ul class="lang-dropdown" *ngIf="isLangDropdownOpen">
+        <li (click)="switchLanguage('ru')">
+          <img [src]="flags['ru']" alt="Russian flag">
+          <span>Русский</span>
+        </li>
+        <li (click)="switchLanguage('en')">
+          <img [src]="flags['en']" alt="English flag">
+          <span>English</span>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="hamburger" [class.active]="isMenuOpen" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
 </div>
+
+<nav class="mobile-nav" [class.active]="isMenuOpen">
+  <a routerLink="." fragment="home" (click)="closeMenu()">{{ '_home' | translate }}</a>
+  <a routerLink="." fragment="about" (click)="closeMenu()">{{ '_about_us' | translate }}</a>
+  <a routerLink="." fragment="how-to-order" (click)="closeMenu()">{{ '_how_to_order' | translate }}</a>
+  <a routerLink="." fragment="services" (click)="closeMenu()">{{ '_services' | translate }}</a>
+  <a routerLink="." fragment="portfolio" (click)="closeMenu()">{{ '_portfolio' | translate }}</a>
+  <a routerLink="." fragment="contact" (click)="closeMenu()">{{ '_contacts' | translate }}</a>
+</nav>

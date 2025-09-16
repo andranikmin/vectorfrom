@@ -1,14 +1,18 @@
-<div class="portfolio-container">
-  <h2>Наше портфолио</h2>
-  <div class="gallery-grid">
-    <div *ngFor="let image of galleryImages; let i = index" class="gallery-item" (click)="openImage(i)">
-      <img [src]="image.src" [alt]="image.alt" />
-      <div class="overlay">
-        <span>{{ image.title }}</span>
+<section class="portfolio-section" id="portfolio">
+  <div class="container">
+    <h2>{{ '_portfolio_title' | translate }}</h2>
+    <p class="subtitle">{{ '_portfolio_subtitle' | translate }}</p>
+
+    <div class="gallery-grid">
+      <div *ngFor="let item of portfolioItems; let i = index" class="gallery-item" (click)="openImage(i)">
+        <img [src]="item.src" [alt]="item.titleKey | translate" />
+        <div class="overlay">
+          <span>{{ item.titleKey | translate }}</span>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <div class="lightbox-overlay" *ngIf="currentImageIndex !== null" (click)="closeImage()">
   
@@ -16,7 +20,7 @@
   
   <div class="lightbox-content" (click)="$event.stopPropagation()">
     <span class="close-button" (click)="closeImage()">&times;</span>
-    <img [src]="galleryImages[currentImageIndex].src" [alt]="galleryImages[currentImageIndex].alt">
+    <img [src]="portfolioItems[currentImageIndex].src" [alt]="portfolioItems[currentImageIndex].titleKey | translate">
   </div>
 
   <div class="nav-arrow next-arrow" (click)="$event.stopPropagation(); showNextImage()">›</div>

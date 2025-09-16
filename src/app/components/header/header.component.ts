@@ -1,36 +1,40 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
-  // Добавляем host-binding, чтобы применять класс .scrolled ко всему компоненту
-  host: {
-    '[class.scrolled]': 'isHeaderScrolled'
-  }
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
   
   isMenuOpen = false;
-  isHeaderScrolled = false; // Новая переменная для отслеживания состояния скролла
+  isLangDropdownOpen = false;
 
-  // Этот метод будет вызываться КАЖДЫЙ раз, когда пользователь скроллит страницу
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    // Проверяем, насколько прокручена страница от верха
-    // Если больше 10px, считаем, что пользователь начал скролл
-    if (window.pageYOffset > 10) {
-      this.isHeaderScrolled = true;
-    } else {
-      this.isHeaderScrolled = false;
-    }
-  }
+  flags: { [key: string]: string } = {
+    ru: 'assets/images/flags/ru.svg',
+    en: 'assets/images/flags/gb.svg'
+  };
+
+  constructor(public translate: TranslateService) {}
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
   }
   
   closeMenu(): void {
-    this.isMenuOpen = false;
+    setTimeout(() => {
+      this.isMenuOpen = false;
+    }, 150);
+  }
+
+  toggleLangDropdown(): void {
+    this.isLangDropdownOpen = !this.isLangDropdownOpen;
+  }
+
+  switchLanguage(language: string): void {
+    this.translate.use(language);
+    this.isLangDropdownOpen = false;
+    this.closeMenu();
   }
 }

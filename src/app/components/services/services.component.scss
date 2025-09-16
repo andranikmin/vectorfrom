@@ -1,6 +1,8 @@
 .services-section {
-  padding: 60px 20px;
-  background-color: #ffffff;
+  padding: 60px 20px 180px 20px;
+  background-image: url('../../../assets/images/services-background.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .container {
@@ -30,13 +32,17 @@ h2 {
 
 .service-card {
   padding: 40px 30px;
-  border-radius: 10px;
+  border-radius: 15px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: #f8f9fa;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 
   &:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   }
 }
 
@@ -46,7 +52,7 @@ h2 {
   svg {
     width: 64px;
     height: 64px;
-    stroke: #ffd700;
+    stroke: var(--primary-color);;
     stroke-width: 1.5;
     transition: transform 0.3s ease;
   }
