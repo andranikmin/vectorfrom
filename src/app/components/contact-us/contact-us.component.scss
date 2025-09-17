@@ -238,6 +238,10 @@ button.btn.primary-gradient {
 /* Адаптивность */
 @media (max-width: 992px) {
   .contact-grid {
-    grid-template-columns: 1fr; // Перестраиваем в одну колонку
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form-container {
+    padding: 40px 20px;
   }
 }
